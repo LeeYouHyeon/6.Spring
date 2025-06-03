@@ -1,0 +1,64 @@
+package com.koreait.www.config;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+@EnableTransactionManagement
+@MapperScan(basePackages = { "com.koreait.www.repository" })
+@Configuration
+public class RootConfig {
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	@Bean
+	public DataSource dataSource() {
+		// jdbcDriver, url, username, password
+		HikariConfig hikariConfig = new HikariConfig();
+		// log4jdbc => DB의 로그를 찍을 수 있도록 드라이버 설정 변경
+		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springdb");
+		hikariConfig.setUsername("springuser");
+		hikariConfig.setPassword("mysql");
+		
+		// ---------------------- hikari 필수설정
+		// 최대 커넥션 갯수
+		hikariConfig.setMaximumPoolSize(5);
+		// 최소 유휴 커넥션 수 (max와 동일하게 설정)
+		hikariConfig.setMinimumIdle(5);
+		
+		hikariConfig.setConnectionTestQuery("SELECT now()"); // test 쿼리
+		hikariConfig.setPoolName("springHikariCP");
+		
+		// ---------------------- hikari 추천설정
+		// cachePrepStmts : cache 사용 여부 설정
+		hikariConfig.addDataSourceProperty("dataSource.cachePrepStmts", "true");
+		// mysql 드라이버 연결당 cache 사이즈 : 250~500 사이 권장
+		hikariConfig.addDataSourceProperty("dataSource.prepStmtsCacheSize", "250");
+		// connection당 캐싱할 prepStmt의 갯수 지정 옵션 : default 256
+		hikariConfig.addDataSourceProperty("dataSource.prepStmtsCacheSqlLimit", "true");
+		// mysql 서버에서 최신 이슈가 있을 경우 지원받을 것인지 설정
+		hikariConfig.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
+		
+		return new HikariDataSource(hikariConfig);
+	}
+	
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() {
+		SqlSessionFactoryBean sqlFactoryBean = new SqlSessionFactoryBean();
+		sqlFactoryBean.setDataSource(dataSource());
+		sqlFactoryBean.setMapperLocations(
+				applicationContext.getResources("classpath:/mapper/*.xml"));
+	}
+}

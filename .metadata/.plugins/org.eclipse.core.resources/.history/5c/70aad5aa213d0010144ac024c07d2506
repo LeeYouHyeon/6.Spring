@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+
+<div class="container-md">
+	<div class="mb-3">
+		<label for="exampleFormControlInput1" class="form-label">Title</label>
+		<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title">
+	</div>
+	<div class="mb-3">
+		<label for="exampleFormControlInput1" class="form-label">Writer</label>
+		<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="writer" name="writer">
+	</div>
+	<div class="mb-3">
+		<label for="exampleFormControlTextarea1" class="form-label">Content</label>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+	</div>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

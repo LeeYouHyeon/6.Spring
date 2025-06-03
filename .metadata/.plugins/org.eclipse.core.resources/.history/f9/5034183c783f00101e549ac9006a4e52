@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<div class="container-md">
+	<h1>Board List Page</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">title</th>
+				<th scope="col">writer</th>
+				<th scope="col">reg_date</th>
+				<th scope="col">read_count</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="bvo">
+				<tr>
+					<th scope="row">${bvo.bno}</th>
+					<td>
+						<a href="/board/detail?bno=${bvo.bno}">${bvo.title}</a>
+					</td>
+					<td>${bvo.writer}</td>
+					<td>${bvo.regDate}</td>
+					<td>${bvo.readCount}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+	<!-- paging area -->
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<!-- 이전 -->
+			<li class="page-item">
+				<a class="page-link ${ph.prev ? '' : 'disabled'}"
+					href="/board/list?pageNo=${ph.startPage - 1}&qty=${ph.pgvo.qty}"
+					aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+
+			<c:forEach var="i" begin="${ph.startPage}" end="${ph.endPage}">
+				<li class="page-item">
+					<a class="page-link ${ph.pgvo.pageNo == i ? 'active' : ''}"
+						href="/board/list?pageNo=${i}&qty=${ph.pgvo.qty}">${i}</a>
+				</li>				
+			</c:forEach>
+
+			<li class="page-item">
+				<a class="page-link ${ph.next ? '' : 'disabled'}"
+					href="/board/list?pageNo=${ph.endPage + 1}&qty=${ph.pgvo.qty}"
+					aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

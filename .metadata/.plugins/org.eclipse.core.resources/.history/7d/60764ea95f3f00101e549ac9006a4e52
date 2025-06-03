@@ -1,0 +1,27 @@
+package com.koreait.www.repository;
+
+import java.util.List;
+
+import com.koreait.www.domain.BoardVO;
+
+public interface BoardDAO {
+
+	int insert(BoardVO bvo);
+
+	List<BoardVO> getList();
+
+	BoardVO getDetail(long bno);
+
+	int update(BoardVO bvo);
+
+	int delete(long bno);
+
+	void addCount(long bno);
+
+	// BoardDAOImpl => mapper (namespace.id)
+	// namespace : BoardDAO의 경로 com.koreait.www.repository.BoardDAO
+	// id : 메서드명
+
+	// DAO에서 파라미터를 여러 개 붙이는 방법 : @Param("변수명")
+	// int readCountUp(@Param("bno") int bno, @Param("i") int i);
+}

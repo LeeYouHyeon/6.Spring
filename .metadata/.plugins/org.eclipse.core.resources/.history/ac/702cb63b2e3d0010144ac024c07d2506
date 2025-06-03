@@ -1,0 +1,9 @@
+package com.koreait.www.service;
+
+import com.koreait.www.domain.BoardVO;
+
+public interface BoardService {
+
+	int insert(BoardVO bvo);
+
+}

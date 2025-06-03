@@ -1,0 +1,17 @@
+package com.koreait.www.handler;
+
+import com.koreait.www.domain.PagingVO;
+
+public class PagingHandler {
+	private int startPage;
+	private int endPage;
+	private boolean prev;
+	private boolean next;
+
+	private int totalCount;
+	private PagingVO pgvo;
+	
+	private int realEndPage;
+	
+	
+}

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.container-md>*{
+  text-align: center;
+}
+
+.line{
+  width: 100%;
+  
+  display: flex;
+}
+
+.bno{
+  width: 5%;
+}
+.title{
+  width: auto;
+}
+.writer{
+  width: 40%;
+}
+.regDate{
+  width: 30%;
+}
+.readCount{
+  width: 30%;
+}
+.buttons{
+  display: flex;
+  justify-content: right;
+}

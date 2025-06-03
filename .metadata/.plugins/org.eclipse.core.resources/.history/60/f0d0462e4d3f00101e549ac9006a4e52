@@ -1,0 +1,34 @@
+@charset "UTF-8";
+div{
+  text-align: center;
+}
+
+.line{
+  width: 100%;
+  display: flex;
+}
+
+.title{
+	font-size: 24px;
+	font-weight: 600;
+}
+.bno{
+  width: 5%;
+}
+.writer{
+  width: 45%;
+}
+.regDate{
+  width: 30%;
+}
+.readCount{
+  width: 20%;
+}
+.content{
+	text-align: left;
+	min-height: 20vh;
+}
+.buttons{
+  display: flex;
+  justify-content: right;
+}

@@ -1,0 +1,12 @@
+package com.koreait.www.repository;
+
+import com.koreait.www.domain.BoardVO;
+
+public interface BoardDAO {
+
+	void insert(BoardVO bvo);
+
+	// BoardDAOImpl => mapper (namespace.id)
+	// namespace : BoardDAO의 경로 com.koreait.www.repository.BoardDAO
+	// id : 메서드명
+}

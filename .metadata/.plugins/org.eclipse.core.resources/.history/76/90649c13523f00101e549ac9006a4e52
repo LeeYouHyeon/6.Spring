@@ -1,0 +1,46 @@
+package com.koreait.www.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.koreait.www.domain.BoardVO;
+import com.koreait.www.repository.BoardDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class BoardServiceImpl implements BoardService {
+	
+	private final BoardDAO bdao;
+
+	@Override
+	public int insert(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		log.info(">>>> service insert {}", bvo);
+		return bdao.insert(bvo);
+	}
+
+	@Override
+	public List<BoardVO> getList() {
+		// TODO Auto-generated method stub
+		log.info(">>>> service list");
+		return bdao.getList();
+	}
+
+	@Override
+	public BoardVO getDetail(int bno) {
+		log.info(">>>> service detail " + bno);
+		return bdao.getDetail(bno);
+	}
+
+	@Override
+	public int update(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		log.info(">>>> service update " + bvo);
+		return bdao.update(bvo);
+	}
+}

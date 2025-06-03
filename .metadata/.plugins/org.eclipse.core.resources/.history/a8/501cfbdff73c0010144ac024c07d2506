@@ -1,0 +1,27 @@
+package com.koreait.www.config;
+
+import javax.sql.DataSource;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.zaxxer.hikari.HikariConfig;
+
+@EnableTransactionManagement
+@MapperScan(basePackages = { "com.koreait.www.repository" })
+@Configuration
+public class RootConfig {
+	
+	@Bean
+	public DataSource dataSource() {
+		// jdbcDriver, url, username, password
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springdb");
+		hikariConfig.setUsername("springuser");
+		hikariConfig.setPassword("mysql");
+	}
+	
+}

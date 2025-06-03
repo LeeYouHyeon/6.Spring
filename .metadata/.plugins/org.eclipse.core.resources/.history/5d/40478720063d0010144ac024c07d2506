@@ -1,0 +1,5 @@
+package com.koreait.www.config.repository;
+
+public interface BoardDAO {
+
+}
