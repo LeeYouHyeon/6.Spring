@@ -8,6 +8,7 @@
 		<item key="wrap" value="true"/>
 		<item key="incremental" value="false"/>
 		<list key="findhistory">
+			<item value="lom"/>
 			<item value="bno"/>
 			<item value="isUpdate"/>
 			<item value="isIncrease"/>

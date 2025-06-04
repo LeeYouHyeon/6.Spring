@@ -25,3 +25,14 @@ reg_date datetime default now(),
 read_count int default 0,
 primary key(bno)
 );
+
+-- commentDB
+-- 2025-06-04
+create table comment(
+cno bigint auto_increment,
+bno bigint not null,
+writer varchar(500) not null,
+content text,
+reg_date datetime default now(),
+primary key(cno)
+);

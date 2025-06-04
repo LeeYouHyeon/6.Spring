@@ -1,0 +1,24 @@
+package com.koreait.www.service;
+
+import org.springframework.stereotype.Service;
+
+import com.koreait.www.domain.CommentVO;
+import com.koreait.www.repository.CommentDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class CommentServiceImpl implements CommentService {
+	
+	private final CommentDAO cdao;
+
+	@Override
+	public int post(CommentVO cvo) {
+		// TODO Auto-generated method stub
+		return cdao.post(cvo);
+	}
+	
+}
