@@ -44,5 +44,5 @@
       6. 계정 보안
          * TBA
 
-Spring 설정법
-  WIP
+4. Spring 설정법
+   WIP
