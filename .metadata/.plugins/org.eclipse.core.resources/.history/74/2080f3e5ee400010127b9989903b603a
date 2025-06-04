@@ -1,0 +1,9 @@
+package com.koreait.www.service;
+
+import com.koreait.www.domain.CommentVO;
+
+public interface CommentService {
+
+	int post(CommentVO cvo);
+
+}

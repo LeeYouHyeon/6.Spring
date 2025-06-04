@@ -1,0 +1,21 @@
+package com.koreait.www.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.koreait.www.service.CommentService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RequiredArgsConstructor
+@RequestMapping("/comment/*")
+@Slf4j
+@RestController // 비동기를 주로 쓸 경우 가독성을 위해 RestController로 표기. 기능은 큰 차이 없음
+public class CommentController {
+
+	private final CommentService csv;
+	
+	
+	
+}

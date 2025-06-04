@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Spring Project</title>
 <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
 <script type="text/javascript" src="/resources/dist/js/bootstrap.bundle.min.js"></script>
 </head>

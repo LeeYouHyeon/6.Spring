@@ -1,0 +1,14 @@
+package com.koreait.www.repository;
+
+import java.util.List;
+
+import com.koreait.www.domain.CommentVO;
+import com.koreait.www.domain.PagingVO;
+
+public interface CommentDAO {
+
+	int post(CommentVO cvo);
+
+	List<CommentVO> getList(long bno, PagingVO pgvo);
+
+}
