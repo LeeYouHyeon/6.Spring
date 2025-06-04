@@ -20,7 +20,7 @@
    6. 라이브러리 : https://mvnrepository.com/
       * Spring에선 jar를 직접 다운받지 않고 프로젝트의 pom.xml 파일에 있는 dependencies에 추가하여 사용한다. (Lombok 제외)
       1. Project Lombok : annotation을 통해 getter, setter, 생성자, toString 등 코드를 자동으로 생성해주는 라이브러리
-         * Project Lombok 사이트(https://projectlombok.org/)에서 .jar 파일을 받는다.
+         * Project Lombok 사이트(https://projectlombok.org/ )에서 .jar 파일을 받는다.
          * 받은 .jar를 직접 실행하여 STS.exe에 설치한다.
          * 이후 프로젝트의 pom.xml의 dependencies에 lombok을 추가한다. (https://projectlombok.org/setup/maven)
       2. 로그 관련
