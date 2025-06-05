@@ -1,0 +1,9 @@
+package com.koreait.www.repository;
+
+import com.koreait.www.domain.FileVO;
+
+public interface FileDAO {
+
+	int insert(FileVO fvo);
+
+}

@@ -21,6 +21,8 @@ public interface BoardDAO {
 
 	int getTotalCount(PagingVO pgvo);
 
+	long getBno();
+
 	// BoardDAOImpl => mapper (namespace.id)
 	// namespace : BoardDAO의 경로 com.koreait.www.repository.BoardDAO
 	// id : 메서드명

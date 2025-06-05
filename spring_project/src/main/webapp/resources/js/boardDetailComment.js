@@ -6,6 +6,7 @@ console.log(bnoValue);
 
 const cmtText = document.getElementById('cmtText'); // span이면 innerText로 가져오기
 const cmtWriter = document.getElementById('cmtWriter');
+const cmtUpdateBtn = document.getElementById('cmtUpdateBtn');
 
 document.getElementById('cmtClearBtn').onclick = clearInputs;
 
@@ -55,7 +56,7 @@ function spreadCommentList(bno, page = 1) {
     const comments = document.getElementById('cmtListArea');
     if (page == 1 && cmtList.length == 0) {
       // 댓글이 없을 경우
-      comments.innerHTML = `<div class="row p-2 border border-top-0 justify-content-center">댓글이 없습니다.</div>`;
+      comments.innerHTML = `<div class="row p-2 mt-2 justify-content-center">댓글이 없습니다.</div>`;
       return;
     }
 
@@ -94,7 +95,47 @@ document.addEventListener('click', e => {
     spreadCommentList(bnoValue, page);
   }
 
-  // 수정
+  // 수정 모달 호출. cno, content => 서버로 전송하여 update
+  if (e.target.classList.contains('mod')) {
+    const container = e.target.closest('.container');
+    const cmtWriter = container.firstChild.firstChild.textContent;
+    const cmtText = container.lastChild.textContent;
+    const cno = e.target.closest('div').dataset.cno;
+    console.log(cmtWriter, ' >> ', cmtText);
+
+    document.getElementById('modalWriter').innerHTML = `${cno}. <b>${cmtWriter}</b>`;
+    document.getElementById('modalInput').value = cmtText;
+
+    cmtUpdateBtn.setAttribute("data-cno", cno);
+  }
+
+  // update
+  if (e.target.id === 'cmtUpdateBtn') {
+    const cno = cmtUpdateBtn.dataset.cno;
+    const modalInput = document.getElementById('modalInput');
+    const cmtText = modalInput.value;
+
+    if (cmtText == '') {
+      modalInput.focus();
+      return;
+    }
+
+    // TODO
+    let cmtData = {
+      cno: cno,
+      content: cmtText
+    };
+
+    console.log(cmtData);
+    updateComment(cmtData).then(result => {
+      if (result == '1') {
+        alert('댓글 수정 성공');
+        const modal = document.getElementById('myModal');
+        bootstrap.Modal.getInstance(modal).hide();
+        spreadCommentList(bnoValue);
+      } else alert('댓글 수정 실패');
+    })
+  }
 
   // 삭제
   if (e.target.classList.contains('del')) {
@@ -113,6 +154,26 @@ document.addEventListener('click', e => {
     });
   }
 });
+
+// update
+async function updateComment(cmtData) {
+  try {
+    const url = '/comment/update';
+    const config = {
+      method: 'put', // RESTful
+      headers: {
+        'Content-Type' : 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(cmtData)
+    };
+
+    const response = await fetch(url, config);
+    const result = await response.text();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // delete
 async function removeCommentFromServer(cno) {

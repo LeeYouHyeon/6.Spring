@@ -2,16 +2,17 @@ package com.koreait.www.service;
 
 import java.util.List;
 
+import com.koreait.www.domain.BoardDTO;
 import com.koreait.www.domain.BoardVO;
 import com.koreait.www.domain.PagingVO;
 
 public interface BoardService {
 
-	int insert(BoardVO bvo);
+	int insert(BoardDTO bdto);
 
 	List<BoardVO> getList(PagingVO pgvo);
 
-	BoardVO getDetail(long bno, boolean isIncrease);
+	BoardDTO getDetail(long bno, boolean isIncrease);
 
 	int update(BoardVO bvo);
 

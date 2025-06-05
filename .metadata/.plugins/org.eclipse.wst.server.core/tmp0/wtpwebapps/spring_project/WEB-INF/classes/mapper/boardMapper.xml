@@ -28,7 +28,9 @@
 		select count(bno) from board where is_del="N"
 		<include refid="search"></include>
 	</select>
-	
+	<select id="getBno" resultType="long">
+		select max(bno) from board
+	</select>
 	<!-- 
 	select * from board where is_del="N"
 	and (title like "%test%")

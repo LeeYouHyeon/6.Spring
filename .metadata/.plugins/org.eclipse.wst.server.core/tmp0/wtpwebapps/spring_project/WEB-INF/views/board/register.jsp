@@ -4,22 +4,36 @@
 <div class="container-md">
 	<h3>Board Register Page</h3>
 
-	<form action="/board/insert" method="post">
+	<!-- enctype : multipart/form-data -->
+	<form action="/board/insert" method="post" enctype="multipart/form-data">
+		<!-- bvo area -->
 		<div class="mb-3">
 			<label for="exampleFormControlInput1" class="form-label">Title</label>
 			<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title" required>
 		</div>
 		<div class="mb-3">
-			<label for="exampleFormControlInput1" class="form-label">Writer</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="writer" name="writer" required>
+			<label for="exampleFormControlInput2" class="form-label">Writer</label>
+			<input type="text" class="form-control" id="exampleFormControlInput2" placeholder="writer" name="writer" required>
 		</div>
 		<div class="mb-3">
 			<label for="exampleFormControlTextarea1" class="form-label">Content</label>
 			<textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content" required></textarea>
 		</div>
-
-		<button type="submit" class="btn btn-outline-success">등록</button>
+		
+		<!-- file add area -->
+		<div class="mb-3">
+			<input type="file" class="form-control" id="file" name="files" multiple style="display: none">
+			<button type="button" class="btn btn-outline-primary" id="trigger">Upload files</button>
+		</div>
+		
+		<!-- file list area -->
+		<div class="mb-3" id="fileZone"></div>
+		
+		<!-- button -->
+		<button type="submit" class="btn btn-success" id="regBtn">등록</button>
 	</form>
+	
+	<script type="text/javascript" src="/resources/js/boardRegisterFile.js"></script>
 </div>
 
 <%@ include file="../layout/footer.jsp"%>

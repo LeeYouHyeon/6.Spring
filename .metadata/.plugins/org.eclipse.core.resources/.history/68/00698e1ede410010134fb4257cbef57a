@@ -1,0 +1,54 @@
+package com.koreait.www.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.koreait.www.domain.BoardDTO;
+import com.koreait.www.domain.BoardVO;
+import com.koreait.www.domain.PagingVO;
+import com.koreait.www.repository.BoardDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class BoardServiceImpl implements BoardService {
+	
+	private final BoardDAO bdao;
+
+	@Override
+	public int insert(BoardDTO bdto) {
+		bdao.insert(bdto.getBvo());
+		return 1; 
+	}
+
+	@Override
+	public List<BoardVO> getList(PagingVO pgvo) {
+		return bdao.getList(pgvo);
+	}
+
+	@Override
+	public BoardVO getDetail(long bno, boolean isIncrease) {
+		log.info(">>>> service detail {}, {}" + bno, isIncrease);
+		if (isIncrease) bdao.addCount(bno);
+		return bdao.getDetail(bno);
+	}
+
+	@Override
+	public int update(BoardVO bvo) {
+		return bdao.update(bvo);
+	}
+
+	@Override
+	public int delete(long bno) {
+		return bdao.delete(bno);
+	}
+
+	@Override
+	public int getTotalCount(PagingVO pgvo) {
+		return bdao.getTotalCount(pgvo);
+	}
+}

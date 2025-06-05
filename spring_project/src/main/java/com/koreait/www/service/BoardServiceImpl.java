@@ -3,10 +3,14 @@ package com.koreait.www.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.koreait.www.domain.BoardDTO;
 import com.koreait.www.domain.BoardVO;
+import com.koreait.www.domain.FileVO;
 import com.koreait.www.domain.PagingVO;
 import com.koreait.www.repository.BoardDAO;
+import com.koreait.www.repository.FileDAO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,44 +21,53 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardServiceImpl implements BoardService {
 	
 	private final BoardDAO bdao;
+	private final FileDAO fdao;
 
+	@Transactional
 	@Override
-	public int insert(BoardVO bvo) {
-		// TODO Auto-generated method stub
-		log.info(">>>> service insert {}", bvo);
-		return bdao.insert(bvo);
+	public int insert(BoardDTO bdto) {
+		// BoardDTO => BoardVO + flist
+		int isOk = bdao.insert(bdto.getBvo());
+		if (bdto.getFlist() == null) return isOk;
+		if (isOk == 0) return 0;
+		
+		// fileDAO 생성 => fileMapper를 생성하여 fvo 값을 DB로 등록
+		long lastBno = bdao.getBno();
+		for (FileVO fvo : bdto.getFlist()) {
+			fvo.setBno(lastBno);
+			// file에 저장
+			isOk *= fdao.insert(fvo);
+		}
+		return isOk; 
 	}
 
 	@Override
 	public List<BoardVO> getList(PagingVO pgvo) {
-		// TODO Auto-generated method stub
-		log.info(">>>> service list");
 		return bdao.getList(pgvo);
 	}
-
+	
+	@Transactional
 	@Override
-	public BoardVO getDetail(long bno, boolean isIncrease) {
-		log.info(">>>> service detail {}, {}" + bno, isIncrease);
+	public BoardDTO getDetail(long bno, boolean isIncrease) {
 		if (isIncrease) bdao.addCount(bno);
-		return bdao.getDetail(bno);
+		BoardVO bvo = bdao.getDetail(bno);
+		
+		List<FileVO> flist = fdao.getList(bno);
+		return new BoardDTO(bvo, flist);
 	}
 
 	@Override
 	public int update(BoardVO bvo) {
-		// TODO Auto-generated method stub
-		log.info(">>>> service update " + bvo);
 		return bdao.update(bvo);
 	}
 
 	@Override
 	public int delete(long bno) {
-		// TODO Auto-generated method stub
 		return bdao.delete(bno);
 	}
 
 	@Override
 	public int getTotalCount(PagingVO pgvo) {
-		// TODO Auto-generated method stub
 		return bdao.getTotalCount(pgvo);
 	}
 }

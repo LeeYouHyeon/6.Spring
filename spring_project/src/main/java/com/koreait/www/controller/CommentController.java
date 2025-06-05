@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,5 +68,13 @@ public class CommentController {
 		log.info(">>>> delete cno >> " + cno);
 		
 		return csv.delete(cno) > 0 ? "1" : "0";
+	}
+	
+	@PutMapping("/update")
+	@ResponseBody
+	public String update(@RequestBody CommentVO cvo) {
+		log.info(">>>> cvo >> {}", cvo);
+		int isOk = csv.update(cvo);
+		return isOk > 0 ? "1" : "0";
 	}
 }

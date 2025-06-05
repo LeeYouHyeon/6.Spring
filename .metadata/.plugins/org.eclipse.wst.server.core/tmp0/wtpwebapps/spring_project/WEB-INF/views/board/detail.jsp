@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="container-md d-flex flex-column align-items-center">
+	<c:set value="${bdto.bvo}" var="bvo" />
 	<div class="container w-100 border border-secondary border-2 mt-3 rounded">
 		<div class="row mt-3 py-2">
 			<div class="col text-center pt-1">
@@ -29,6 +30,38 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- file upload line -->
+	<div class="mb-3">
+		<ul class="list-group list-group-flush">
+			<!-- 파일 갯수만큼 li 반복. 타입이 1이면 그림, 아니면 파일 모양으로 표시 -->
+			<c:forEach items="${bdto.flist}" var="fvo">
+				<li class="list-group-item">
+					<c:choose>
+						<c:when test="${fvo.fileType > 0}">
+							<!-- 그림파일 -->
+							<div><img alt="" src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"></div>
+						</c:when>
+						<c:otherwise>
+							<!-- 일반파일 : 다운로드 가능 -->
+							<a href="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}" download="${fvo.fileName}">
+								<!-- 파일모양 아이콘 -->
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-arrow-down-fill" viewBox="0 0 16 16">
+								  <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5"/>
+								</svg>
+							</a>
+						</c:otherwise>
+					</c:choose>
+					
+					<div class="mb-3">
+						<div class="fw-bold">${fvo.fileName}</div>
+					</div>
+					<span class="badge text-bg-primary">${fvo.regDate} / ${fvo.fileSize}</span>
+				</li>
+			</c:forEach>
+		</ul>
+	</div>
+	
 	<!-- comment line -->
 	<!-- post -->
 	<div class="container border border-secondary rounded w-75 my-3 p-0 d-flex flex-column align-items-center">
@@ -75,15 +108,18 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+	        <h1 class="modal-title fs-5" id="modalWriter">Login User</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        ...
+	        <input type="text" id="modalInput" class="form-control">
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-primary" id="cmtUpdateBtn">
+        		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+  					<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+				</svg>
+	        </button>
 	      </div>
 	    </div>
 	  </div>

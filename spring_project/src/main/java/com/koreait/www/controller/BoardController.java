@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.koreait.www.domain.BoardDTO;
 import com.koreait.www.domain.BoardVO;
+import com.koreait.www.domain.FileVO;
 import com.koreait.www.domain.PagingVO;
+import com.koreait.www.handler.FileHandler;
 import com.koreait.www.handler.PagingHandler;
 import com.koreait.www.service.BoardService;
 
@@ -27,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	// 생성자 주입 시 @RequiredArgsConstructor 사용, 멤버 변수는 반드시 final
 	private final BoardService bsv;
+	private final FileHandler fh;
 	
 	// servlet path case를 method 형식으로 사용
 	// return값이 가야 하는 주소
@@ -44,10 +49,22 @@ public class BoardController {
 		log.info(">>>> {} {}", logTitle, isOk > 0 ? "성공" : "실패");
 	}
 	
+	// 첨부파일 추가 => multipart/form-data => multiple => Multipart[]
 	@PostMapping("/insert")
-	public String insert(BoardVO bvo) {
+	public String insert(BoardVO bvo, MultipartFile[] files) {
 		log.info(">>>> bvo >> {}", bvo);
-		printLog("insert", bsv.insert(bvo));
+				
+		List<FileVO> flist = null;
+		if (files[0].getSize() > 0) { // 파일이 있다면
+			// MultipartFile[] => DB에 저장할 값으로 생성 => List<FileVO> 형태로 생성
+			// 실제 파일을 저장 => FileHandler
+			flist = fh.uploadFile(files);
+			log.info(">>>> flist >> {}", flist);
+		}
+		
+		BoardDTO bdto = new BoardDTO(bvo, flist); 
+		
+		printLog("insert", bsv.insert(bdto));
 		return "redirect:/board/list";
 	}
 	
@@ -68,13 +85,11 @@ public class BoardController {
 	// isUpdate를 wrapper class로 받아 null을 받을 수 있게 함
 	@GetMapping({"/detail", "/modify"})
 	public void detail(@RequestParam("bno") long bno, Boolean isUpdate, Model m, HttpServletRequest request) {
-		log.info(">>>> uri >> {}", request.getRequestURI()); // /board/detail ? /board/modify
-		log.info(">>>> bno >> " + bno);
 		boolean isIncrease = isUpdate == null && request.getRequestURI().equals("/board/detail");
-		log.info(">>>> isUpdate >> {}", isUpdate != null);
-		BoardVO bvo = bsv.getDetail(bno, isIncrease);
-		log.info(">>>> bvo >> {}", bvo);
-		m.addAttribute("bvo", bvo);
+		
+		BoardDTO bdto = bsv.getDetail(bno, isIncrease);
+		
+		m.addAttribute("bdto", bdto);
 	}
 	
 	// RedirectAttributes
