@@ -11,4 +11,18 @@
 	<select id="getList" resultType="com.koreait.www.domain.FileVO">
 		select * from file where bno=#{bno}
 	</select>
+	
+	<delete id="delete">
+		delete from file where uuid=#{uuid}
+	</delete>
+	
+	<select id="getOne" resultType="com.koreait.www.domain.FileVO">
+		select * from file where uuid=#{uuid}
+	</select>
+	<select id="getAllFileList" resultType="com.koreait.www.domain.FileVO">
+		select * from file
+	</select>
+	<select id="getBno" resultType="long">
+		select bno from file where uuid=#{uuid}
+	</select>
 </mapper>

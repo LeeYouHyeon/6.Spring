@@ -19,4 +19,6 @@ public interface CommentDAO {
 
 	int update(CommentVO cvo);
 
+	long getBno(long cno);
+
 }

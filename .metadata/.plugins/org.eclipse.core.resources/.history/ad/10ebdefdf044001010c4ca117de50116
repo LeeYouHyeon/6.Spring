@@ -1,0 +1,12 @@
+package com.koreait.www.handler;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class FileSweeper {
+	// 매일 등록된 시간에 파일 정리 => 스케줄러가 실행
+	// 화면 상에서(DB에서) 삭제되었지만 실제 파일로 남아있는 파일을 제거
+	// FileRemoveHandler를 사용해도 됨
+	// 스케줄 기록 cron 방식 : 초 분 시 일 월 요일 년도
+	
+}

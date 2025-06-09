@@ -19,4 +19,7 @@
 	<update id="update">
 		update comment set content=#{content} where cno=#{cno} 
 	</update>
+	<select id="getBno" resultType="long">
+		select bno from comment where cno=#{cno}
+	</select>
 </mapper>

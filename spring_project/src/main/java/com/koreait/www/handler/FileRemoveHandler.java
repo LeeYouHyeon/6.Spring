@@ -1,0 +1,36 @@
+package com.koreait.www.handler;
+
+import java.io.File;
+
+import com.koreait.www.domain.FileVO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class FileRemoveHandler {
+	
+	private final String UP_DIR = "D:\\web_0226_lyh\\_myProject\\_java\\_fileUpload";
+
+	public String deleteRealFile(FileVO fvo) {
+		boolean isDel = false;
+		log.info(">>>> deleteFile >> {}", fvo.getFileName());
+
+		File fileDir = new File(UP_DIR + File.separator + fvo.getSaveDir());
+		File removeFile = new File(fileDir, fvo.getUuid() + "_" + fvo.getFileName());
+		File removeThumbFile = new File(fileDir, fvo.getUuid() + "_th_" + fvo.getFileName());
+		
+		if (!removeFile.exists()) {
+			log.info(">>>> file not found");
+			return "0";
+		}
+		
+		isDel = removeFile.delete();
+		log.info(">>>> file delete {}", isDel ? "성공" : "실패");
+		if (isDel && fvo.getFileType() == 1 && removeThumbFile.exists()) {
+			isDel = removeThumbFile.delete();
+			log.info(">>>> thumbnail file delete {}", isDel ? "성공" : "실패");
+		}
+
+		return isDel ? "1" : "0";
+	}
+}

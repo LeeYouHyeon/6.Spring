@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<div class="container-md d-flex flex-column align-items-center">
+	<c:set value="${bdto.bvo}" var="bvo" />
+	<h3>Board Modify Page</h3>
+
+	<!-- enctype : multipart/form-data -->
+	<form action="/board/insert" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="bno" value="${bvo.bno}">
+		<!-- bvo area -->
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label">Title</label>
+			<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title" required>
+		</div>
+		<div class="mb-3">
+			Writer : ${bvo.writer}
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label">Content</label>
+			<textarea
+				class="form-control"
+				id="exampleFormControlTextarea1"
+				rows="5"
+				name="content"
+				required>${bvo.content}</textarea>
+		</div>
+		
+		<!-- file add area -->
+		<div class="mb-3">
+			<input type="file"
+				class="form-control"
+				id="file"
+				name="files"
+				multiple
+				style="display: none">
+			<button type="button" class="btn btn-outline-primary" id="trigger">Upload files</button>
+		</div>
+		
+		<!-- file list area -->
+		<div class="mb-3" id="fileZone"></div>
+		
+		<!-- button -->
+		<button type="submit" class="btn btn-success" id="regBtn">등록</button>
+	</form>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

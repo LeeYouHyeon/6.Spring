@@ -1,0 +1,8 @@
+package com.koreait.www.handler;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class FileSweeper {
+// 매일 등록된 시간에 파일 정리
+}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.koreait.www.domain.BoardDTO;
 import com.koreait.www.domain.BoardVO;
+import com.koreait.www.domain.FileVO;
 import com.koreait.www.domain.PagingVO;
 
 public interface BoardService {
@@ -14,10 +15,14 @@ public interface BoardService {
 
 	BoardDTO getDetail(long bno, boolean isIncrease);
 
-	int update(BoardVO bvo);
+	int update(BoardDTO boardDTO);
 
 	int delete(long bno);
 
 	int getTotalCount(PagingVO pgvo);
+	
+	FileVO getOne(String uuid);
+
+	int deleteFile(String uuid);
 
 }

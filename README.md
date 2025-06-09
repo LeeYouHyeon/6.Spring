@@ -40,7 +40,10 @@
           * Thumbnailator 0.4.14
           * Tika Core 2.4.1
           * Apache Tika Parser Modules 2.4.1
-      7) 계정 보안
+      7) 스케줄링
+          * Quartz 2.3.2
+          * Quartz Jobs 2.3.2
+      8) 계정 보안
           * TBA
 
 4. Spring 설정법 WIP

@@ -5,7 +5,7 @@
 <mapper namespace="com.koreait.www.repository.BoardDAO">
 	<!-- typeAlias가 없다면 resultType을 적을 때 com.koreait.www.domain.BoardVO -->
 	<insert id="insert">
-		insert into board(title, writer, content) values (#{title}, #{writer}, #{content})
+		insert into board(title, writer, content, file_qty) values (#{title}, #{writer}, #{content}, #{fileQty})
 	</insert>
 	<select id="getList" resultType="com.koreait.www.domain.BoardVO">
 		select * from board where is_del="N" 
@@ -16,7 +16,7 @@
 		select * from board where bno=#{bno} and is_del="N"
 	</select>
 	<update id="update">
-		update board set title=#{title}, content=#{content}, reg_date=now() where bno=#{bno}
+		update board set title=#{title}, content=#{content}, reg_date=now(), file_qty = file_qty + #{fileQty} where bno=#{bno}
 	</update>
 	<update id="addCount">
 		update board set read_count=read_count+1 where bno=#{bno}
@@ -31,6 +31,15 @@
 	<select id="getBno" resultType="long">
 		select max(bno) from board
 	</select>
+	<update id="increaseCmtQty">
+		update board set cmt_qty = cmt_qty + 1 where bno = #{bno}
+	</update>
+	<update id="decreaseCmtQty">
+		update board set cmt_qty = cmt_qty - 1 where bno = #{bno}
+	</update>
+	<update id="decreaseFileQty">
+		update board set file_qty = file_qty - 1 where bno = #{bno}
+	</update>
 	<!-- 
 	select * from board where is_del="N"
 	and (title like "%test%")

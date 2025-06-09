@@ -3,9 +3,11 @@ package com.koreait.www.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.koreait.www.domain.CommentVO;
 import com.koreait.www.domain.PagingVO;
+import com.koreait.www.repository.BoardDAO;
 import com.koreait.www.repository.CommentDAO;
 
 import lombok.RequiredArgsConstructor;
@@ -17,11 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentServiceImpl implements CommentService {
 	
 	private final CommentDAO cdao;
-
+	private final BoardDAO bdao;
+	
+	@Transactional
 	@Override
 	public int post(CommentVO cvo) {
 		// TODO Auto-generated method stub
-		return cdao.post(cvo);
+		int isOk = cdao.post(cvo);
+		if (isOk == 0) return 0;
+		return bdao.increaseCmtQty(cvo.getBno());
 	}
 
 	@Override
@@ -35,11 +41,17 @@ public class CommentServiceImpl implements CommentService {
 		// TODO Auto-generated method stub
 		return cdao.getTotalCount(bno);
 	}
-
+	
+	@Transactional
 	@Override
 	public int delete(long cno) {
 		// TODO Auto-generated method stub
-		return cdao.delete(cno);
+		long bno = cdao.getBno(cno);
+		
+		int isOk = cdao.delete(cno);
+		if (isOk == 0) return 0;
+		
+		return bdao.decreaseCmtQty(bno);
 	}
 
 	@Override

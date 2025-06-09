@@ -1,7 +1,0 @@
-package com.koreait.www.repository;
-
-public interface BoardDAO {
-
-	// BoardDAOImpl => mapper (namespace.id)
-	// namespace : BoardDAO의 경로 com.koreait.www.repository.BoardDAO
-}

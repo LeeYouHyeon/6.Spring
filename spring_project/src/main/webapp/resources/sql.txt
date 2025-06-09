@@ -49,3 +49,16 @@ file_size bigint,
 reg_date datetime default now(),
 primary key(uuid)
 );
+
+-- 2025-06-09
+-- 댓글 갯수, 파일 갯수
+alter table board add cmt_qty int default 0;
+alter table board add file_qty int default 0;
+
+update board B set cmt_qty = (
+select count(cno) from comment c
+where c.bno = b.bno);
+
+update board B set file_qty = (
+select count(uuid) from file f
+where f.bno = b.bno);

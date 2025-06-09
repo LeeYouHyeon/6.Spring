@@ -1,9 +1,0 @@
-##\uB77C\uC774\uBE0C\uB7EC\uB9AC
-log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
-
-##spl\uCD9C\uB825\uD560 \uB54C 1\uC904 \uCD9C\uB825\uD560\uB798 2\uC904 \uCD9C\uB825\uD560\uB798
-log4jdbc.dump.sql.maxlinelength=0
-
-
-#\uB4DC\uB77C\uC774\uBC84 \uC790\uB3D9 \uB85C\uADF8 \uCDE8\uC18C\u0086\u008C
-#log4jdbc.auto.load.popular.drivers=false

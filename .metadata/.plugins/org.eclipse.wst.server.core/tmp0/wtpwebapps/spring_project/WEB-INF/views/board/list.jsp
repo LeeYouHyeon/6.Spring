@@ -50,10 +50,10 @@
 				<tr>
 					<th scope="row">${bvo.bno}</th>
 					<td>
-						<a href="/board/detail?bno=${bvo.bno}">${bvo.title}</a>
+						<a href="/board/detail?bno=${bvo.bno}">${bvo.title}</a> <span class="text-danger fw-bold">[${bvo.cmtQty}]</span>
 					</td>
 					<td>${bvo.writer}</td>
-					<td>${bvo.regDate}</td>
+					<td>${bvo.regDate} <span class="text-danger fw-bold">[${bvo.fileQty}]</span></td>
 					<td>${bvo.readCount}</td>
 				</tr>
 			</c:forEach>

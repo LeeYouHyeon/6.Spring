@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<div class="container-md d-flex flex-column align-items-center">
+	<c:set value="${bdto.bvo}" var="bvo" />
+	<h3>Board Modify Page</h3>
+
+	<!-- enctype : multipart/form-data -->
+	<form action="/board/update"
+		method="post"
+		class="w-100"
+		enctype="multipart/form-data">
+			<input type="hidden" name="bno" value="${bvo.bno}">
+			<!-- bvo area -->
+			<div class="container w-100 p-0">
+				<div class="mb-3 row">
+					<div class="col-2">Title :</div>
+					<input type="text"
+						class="form-control col-10"
+						placeholder="Title"
+						name="title"
+						value="${bvo.title}"
+						required>
+				</div>
+				<div class="mb-3 row">
+					Writer : ${bvo.writer}
+				</div>
+				<div class="mb-3 row">
+					<label for="content" class="form-label col-12">Content</label>
+					<textarea
+						class="form-control col-12"
+						id="content"
+						rows="5"
+						name="content"
+						style="width: 100%;"
+						required>${bvo.content}</textarea>
+				</div>
+				
+				<!-- file add area -->
+				<div class="mb-3">
+					<input type="file"
+						class="form-control"
+						id="file"
+						name="files"
+						multiple
+						style="display: none">
+					<button type="button"
+						class="btn btn-outline-primary"
+						id="trigger">Upload files</button>
+				</div>
+			
+				<!-- file list area -->
+				<div class="mb-3">
+					<ul class="list-group list-group-flush">
+						<!-- 파일 갯수만큼 li 반복. 타입이 1이면 그림, 아니면 파일 모양으로 표시 -->
+						<c:forEach items="${bdto.flist}" var="fvo">
+							<li class="list-group-item">
+								<div class="mb-3">
+									<div class="fw-bold text-secondary">기존 파일</div>
+									${fvo.fileName}
+									<button type="button" class="removeFileBtn btn" data-uuid="${fvo.uuid}">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+										  <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"/>
+										</svg>
+									</button>
+								</div>
+								<span class="badge text-bg-secondary">${fvo.fileSize} Bytes</span>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+				
+				<div class="mb-3" id="fileZone"></div>
+			</div>
+		
+		<!-- button -->
+		<button type="submit" class="btn btn-success" id="regBtn">등록</button>
+	</form>
+	
+	<script type="text/javascript" src="/resources/js/boardRegisterFile.js"></script>
+	<script type="text/javascript" src="/resources/js/boardModify.js"></script>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

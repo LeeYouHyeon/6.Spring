@@ -2,6 +2,7 @@ package com.koreait.www.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+@EnableScheduling
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.koreait.www.controller", "com.koreait.www.service", "com.koreait.www.handler" })
 // DAO는 DB에서 설정, 나머지는 @ComponentScan에 추가
