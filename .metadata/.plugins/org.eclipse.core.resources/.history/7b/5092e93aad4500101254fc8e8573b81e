@@ -1,0 +1,40 @@
+package com.koreait.www.controller;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.koreait.www.domain.UserVO;
+import com.koreait.www.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/user/*")
+@Controller
+@RequiredArgsConstructor
+@Slf4j
+public class UserController {
+	
+	private final UserService usv;
+	private final BCryptPasswordEncoder bcEncoder;
+	
+	// 회원가입 페이지로 이동
+	@GetMapping("/register")
+	public void register() {}
+	
+	@PostMapping("/register")
+	public String register(UserVO uvo) {
+		// 회원가입 처리
+		usv.register(uvo);
+		
+		return "redirect:/";
+	}
+	
+	// 로그인 페이지로 이동
+	@GetMapping("login")
+	public void login() {}
+	
+}

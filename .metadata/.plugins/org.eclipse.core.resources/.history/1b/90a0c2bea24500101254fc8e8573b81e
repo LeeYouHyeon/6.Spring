@@ -1,0 +1,53 @@
+package com.koreait.www.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.koreait.www.security.LoginFailureHandler;
+import com.koreait.www.security.LoginSuccessHandler;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	// 비밀번호 암호화 객체 생성 : PasswordEncoder
+	@Bean
+	public PasswordEncoder bcPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	// SuccessHandler 객체 bean 생성 => 사용자 커스텀 객체
+	@Bean
+	public AuthenticationSuccessHandler authSuccessHandler() {
+		return new LoginSuccessHandler();
+	}
+	// FailureHandler 객체 bean 생성 => 사용자 커스텀 객체
+	@Bean
+	public AuthenticationFailureHandler authFailureHandler() {
+		return new LoginFailureHandler();
+	}
+	
+	// UserDetail 객체 bean 생성 => 사용자 커스텀 객체(기본은 ID, pwd)
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 인증용 객체 생성 매니저 설정
+		super.configure(auth);
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// 권한에 따른 수조 매핑
+		super.configure(http);
+	}
+	
+
+}

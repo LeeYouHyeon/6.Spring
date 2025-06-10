@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<div class="container-md mt-3">
+	<form action="/user/login" method="post">
+		<div class="mb-3">
+			<label for="email" class="form-label">Email</label>
+			<input type="text"
+				class="form-control"
+				id="email"
+				name="email"
+				placeholder="Email"
+				required>
+		</div>
+		<div class="mb-3">
+			<label for="pwd" class="form-label">Password</label>
+			<input type="password"
+				class="form-control"
+				id="pwd"
+				name="pwd">
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
+	</form>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

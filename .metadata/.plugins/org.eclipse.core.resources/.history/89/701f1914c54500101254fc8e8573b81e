@@ -1,0 +1,34 @@
+package com.koreait.www.security;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.koreait.www.repository.UserDAO;
+
+public class LoginSuccessHandler implements AuthenticationSuccessHandler {
+	
+	@Autowired
+	private UserDAO udao;
+	
+	private RedirectStrategy redStr = new DefaultRedirectStrategy();
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		// 1. lastLogin 기록 => 로그인 후 가야 하는 경로 설정
+		
+		// 시큐리티에서 로그인을 시도해서 실패하면 실패 기록이 남게 됨
+		// 2. 기존의 로그인 실패 기록 삭제
+
+	}
+
+}

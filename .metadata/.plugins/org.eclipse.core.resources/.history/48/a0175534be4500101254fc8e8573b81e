@@ -1,0 +1,13 @@
+package com.koreait.www.repository;
+
+import com.koreait.www.domain.UserVO;
+
+public interface UserDAO {
+
+	int insert(UserVO uvo);
+
+	int insertAuthInit(String email);
+
+	UserVO getUser(String email);
+
+}

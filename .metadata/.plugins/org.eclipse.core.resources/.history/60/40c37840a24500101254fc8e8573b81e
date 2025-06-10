@@ -1,0 +1,34 @@
+package com.koreait.www.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 인증용 객체 생성 매니저 설정
+		super.configure(auth);
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// 권한에 따른 수조 매핑
+		super.configure(http);
+	}
+	
+	// 비밀번호 암호화 객체 생성 : PasswordEncoder
+	
+	
+	// SuccessHandler 객체 bean 생성 => 사용자 커스텀 객체
+	
+	// FailureHandler 객체 bean 생성 => 사용자 커스텀 객체
+	
+	// UserDetail 객체 bean 생성 => 사용자 커스텀 객체(기본은 ID, pwd)
+	
+}

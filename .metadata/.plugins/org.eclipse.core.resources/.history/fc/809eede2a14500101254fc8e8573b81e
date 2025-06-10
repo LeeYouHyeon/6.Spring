@@ -1,0 +1,17 @@
+package com.koreait.www.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	// 비밀번호 암호화 객체 생성 : PasswordEncoder
+	
+	// SuccessHandler 객체 bean 생성 => 사용자 커스텀 객체
+	
+	// FailureHandler 객체 bean 생성 => 사용자 커스텀 객체
+	
+}

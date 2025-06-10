@@ -11,7 +11,7 @@
       * UUID 사용
       * 글 등록 후 업로드한 파일 삭제 가능
    3) 스케줄링
-      * 매일 특정 시간에 DB와 실제 파일을 스캔해서 DB와의 연결이 끊긴 파일을 삭제
+      * 매일 특정 시간에 DB와 실제 파일을 스캔해서 DB에서 삭제된 파일을 실제로 삭제
    4) 멤버 기능
       * 회원가입, 로그인, 로그아웃, 개인정보 수정, 회원탈퇴
       * 글, 댓글을 작성할 때 로그인한 상태라면 작성자 부분을 로그인 정보를 이용해 자동 대체
@@ -47,6 +47,9 @@
           * Quartz 2.3.2
           * Quartz Jobs 2.3.2
       8) 계정 보안
-          * TBA
+          * Spring Security Core 5.5.3
+          * Spring Security Web 5.5.3
+          * Spring Security Config 5.5.3
+          * Spring Security Taglibs 5.5.3
 
 5. Spring 설정법 WIP

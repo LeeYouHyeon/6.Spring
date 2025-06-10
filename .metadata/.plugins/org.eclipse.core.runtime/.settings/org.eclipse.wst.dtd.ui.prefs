@@ -1,11 +1,2 @@
-dtdComment=\#629755 | null | null | false | null | null
-dtdData=\#D8D8D8 | null | null | null | null | null
-dtdDefault=\#D8D8D8 | null | null | null | null | null
-dtdKeyword=\#CC7832 | null | false | null | null | null
-dtdString=\#A5C25C | null | null | null | null | null
-dtdSymbol=\#BED6FF | null | null | null | null | null
-dtdTag=\#BED6FF | null | null | null | null | null
-dtdTagName=\#BED6FF | null | null | null | null | null
 eclipse.preferences.version=1
 org.eclipse.wst.sse.ui.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
-overriddenByCSS=,dtdKeyword,dtdTag,dtdString,dtdTagName,dtdDefault,dtdData,dtdSymbol,dtdComment,

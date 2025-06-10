@@ -1,0 +1,23 @@
+package com.koreait.www.service;
+
+import org.springframework.stereotype.Service;
+
+import com.koreait.www.domain.UserVO;
+import com.koreait.www.repository.UserDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class UserServiceImpl implements UserService {
+	
+	private final UserDAO udao;
+
+	@Override
+	public int insert(UserVO uvo) {
+		// TODO Auto-generated method stub
+		return udao.insert(uvo);
+	}
+}

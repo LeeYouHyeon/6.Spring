@@ -1,0 +1,64 @@
+package com.koreait.www.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.koreait.www.security.CustomAuthUserService;
+import com.koreait.www.security.LoginFailureHandler;
+import com.koreait.www.security.LoginSuccessHandler;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	// 비밀번호 암호화 객체 생성 : PasswordEncoder
+	@Bean
+	public PasswordEncoder bcPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	// SuccessHandler 객체 bean 생성 => 사용자 커스텀 객체
+	@Bean
+	public AuthenticationSuccessHandler authSuccessHandler() {
+		return new LoginSuccessHandler();
+	}
+	// FailureHandler 객체 bean 생성 => 사용자 커스텀 객체
+	@Bean
+	public AuthenticationFailureHandler authFailureHandler() {
+		return new LoginFailureHandler();
+	}
+	
+	// UserDetail 객체 bean 생성 => 사용자 커스텀 객체(기본은 ID, pwd)
+	@Bean
+	public UserDetailsService customDetailsService() {
+		return new CustomAuthUserService();
+	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 인증용 객체 생성 매니저 설정
+		auth.userDetailsService(customDetailsService())
+			.passwordEncoder(bcPasswordEncoder());
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// 권한에 따른 주소 매핑
+		// 로그인 로그아웃 구성정보 설정
+		// csrf() : csrf 공격에 대한 설정
+		http.csrf().disable(); // 작업 후 삭제
+		
+		
+		super.configure(http);
+	}
+
+}

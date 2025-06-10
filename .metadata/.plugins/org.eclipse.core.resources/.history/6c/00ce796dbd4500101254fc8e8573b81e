@@ -1,0 +1,19 @@
+package com.koreait.www.security;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class CustomAuthUserService implements UserDetailsService {
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// username, password 인증용 토큰 => DB에서 확인
+		// 리턴타입 userDetails : 인증된 객체 리턴 <id, password, auth>
+		return null;
+	}
+
+}

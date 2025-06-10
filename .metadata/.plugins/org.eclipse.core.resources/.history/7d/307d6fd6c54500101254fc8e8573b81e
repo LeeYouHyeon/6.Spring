@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.www.repository.UserDAO">
+	<insert id="insert">
+		insert into user(email, pwd, nick_name) values(#{email}, #{pwd}, #{nickName})
+	</insert>
+	<!-- 회원가입 후 권한 부여 -->
+	<insert id="insertAuthInit">
+		insert into auth(email, auth) values(#{email}, 'ROLE_USER')
+	</insert>
+	<select id="getUser" resultType="com.koreait.www.domain.UserVO">
+		select * from user where email=#{email}
+	</select>
+	<select id="getAuthList" resultType="com.koreait.www.domain.AuthVO">
+		select * from auth where email = #{email}
+	</select>
+	<update id="updateLastLogin">
+		update user set lastLogin = now() where email = #{authEmail}
+	</update>
+</mapper>

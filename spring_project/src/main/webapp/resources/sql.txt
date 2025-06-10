@@ -62,3 +62,23 @@ where c.bno = b.bno);
 update board B set file_qty = (
 select count(uuid) from file f
 where f.bno = b.bno);
+
+-- 2025-06-10
+-- user table 생성
+create table user(
+email varchar(256),
+pwd varchar(256) not null,
+nick_name varchar(256),
+reg_date datetime default now(),
+last_login datetime default now(),
+primary key(email)
+);
+
+-- 권한 테이블 생성
+-- ADMIN + USER (+ MANAGER)
+create table auth(
+id bigint auto_increment,
+email varchar(256) not null,
+auth varchar(20) not null,
+primary key(id)
+);

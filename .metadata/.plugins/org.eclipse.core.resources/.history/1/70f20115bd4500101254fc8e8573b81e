@@ -1,0 +1,5 @@
+package com.koreait.www.security;
+
+public class AuthUser {
+
+}
