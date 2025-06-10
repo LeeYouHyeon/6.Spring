@@ -21,7 +21,6 @@ import com.koreait.www.domain.BoardVO;
 import com.koreait.www.domain.FileVO;
 import com.koreait.www.domain.PagingVO;
 import com.koreait.www.handler.FileHandler;
-import com.koreait.www.handler.FileRemoveHandler;
 import com.koreait.www.handler.PagingHandler;
 import com.koreait.www.service.BoardService;
 
