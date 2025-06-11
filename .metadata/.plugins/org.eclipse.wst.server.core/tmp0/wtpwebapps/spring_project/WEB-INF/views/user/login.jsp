@@ -2,8 +2,8 @@
 <%@ include file="../layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div class="w-25 h-auto px-5 py-4 border rounded mx-auto position-relative"
-	style="background-color: azure; margin-top: 13%">
+<div class="w-25 h-auto px-5 py-4 my-5 border rounded mx-auto position-relative bg-info-subtle"
+	style="margin-top: 13%">
 	<c:if test="${param.errmsg ne null}">
 		<span class="badge text-bg-danger position-absolute start-50 translate-middle-x"
 			style="top: -30px;">${param.errmsg}</span>

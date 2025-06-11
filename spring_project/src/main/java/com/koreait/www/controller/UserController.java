@@ -1,15 +1,27 @@
 package com.koreait.www.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.koreait.www.domain.PagingVO;
 import com.koreait.www.domain.UserVO;
+import com.koreait.www.handler.PagingHandler;
 import com.koreait.www.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,10 +52,7 @@ public class UserController {
 	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
-	public void login() {
-		
-		
-	}
+	public void login() {}
 	
 	@PostMapping("/login")
 	public String login(HttpServletRequest request, RedirectAttributes re) {
@@ -54,4 +63,49 @@ public class UserController {
 		return "redirect:/user/login";
 	}
 	
+	@GetMapping("/check/{email}")
+	@ResponseBody
+	public String emailCheck(@PathVariable("email") String email) {
+		return usv.isRegistered(email) ? "1" : "0";
+	}
+	
+	@GetMapping("/info")
+	public void info() {}
+	
+	@GetMapping("/list")
+	public void list(Model m, PagingVO pgvo) {
+		List<UserVO> list = usv.getList(pgvo);
+		
+		int totalCount = usv.getTotalCount(pgvo);
+		PagingHandler ph = new PagingHandler(totalCount, pgvo);
+		
+		m.addAttribute("ph", ph);
+		m.addAttribute("list", list);
+	}
+	
+	@PostMapping("/update")
+	public String update(UserVO uvo, RedirectAttributes re, HttpServletRequest request, HttpServletResponse response) {
+		if (uvo.getPwd() != null) uvo.setPwd(bcEncoder.encode(uvo.getPwd()));
+		logout(request, response);
+		
+		re.addFlashAttribute("modify_msg", usv.update(uvo) > 0 ? "ok" : "fail");
+		return "redirect:/";
+	}
+	
+	@GetMapping("/remove")
+	public String remove(Principal principal, RedirectAttributes re, HttpServletRequest request, HttpServletResponse response) {
+		String email = principal.getName();
+		int isOk = usv.delete(email);
+		
+		logout(request, response);
+		re.addFlashAttribute("remove_msg", isOk > 0 ? "ok" : "fail");
+		return "redirect:/";
+	}
+	
+	// logout 메서드 구현
+	private void logout(HttpServletRequest request, HttpServletResponse response) {
+		// 내가 로그인한 시큐리티의 authentication 객체
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		new SecurityContextLogoutHandler().logout(request, response, authentication);
+	}
 }

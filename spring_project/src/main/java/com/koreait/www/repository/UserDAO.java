@@ -3,6 +3,7 @@ package com.koreait.www.repository;
 import java.util.List;
 
 import com.koreait.www.domain.AuthVO;
+import com.koreait.www.domain.PagingVO;
 import com.koreait.www.domain.UserVO;
 
 public interface UserDAO {
@@ -16,5 +17,15 @@ public interface UserDAO {
 	List<AuthVO> getAuthList(String email);
 
 	int updateLastLogin(String authEmail);
+
+	List<UserVO> getList(PagingVO pgvo);
+
+	int getTotalCount(PagingVO pgvo);
+
+	int update(UserVO uvo);
+
+	int removeAuth(String email);
+
+	int remove(String email);
 
 }

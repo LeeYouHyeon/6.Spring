@@ -1,8 +1,0 @@
-package com.koreait.www.controller;
-
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController // 비동기를 주로 쓸 경우 RestController로 표기해주면 인지하기 좋음
-public class CommentController {
-
-}

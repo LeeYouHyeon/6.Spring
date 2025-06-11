@@ -1,9 +1,0 @@
-package com.koreait.www.repository;
-
-import com.koreait.www.domain.CommentVO;
-
-public interface CommentDAO {
-
-	int post(CommentVO cvo);
-
-}

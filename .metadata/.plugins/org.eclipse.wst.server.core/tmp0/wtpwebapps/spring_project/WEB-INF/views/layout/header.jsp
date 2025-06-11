@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +30,46 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/board/register">Board Register</a></li>
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/board/list">Board List</a></li>
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/register">Join</a></li>
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/login">Login</a></li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/board/register">Write</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/board/list">Board</a>
+					</li>
+					<sec:authorize access="isAnonymous()">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/user/register">Join</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/user/login">Login</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<!-- 인증객체가 만들어진 상태(로그인) -->
+						<!-- 인증 객체를 가져오기 => 현재 로그인 정보 : property="principal" -->
+						<sec:authentication property="principal" var="pri"/>
+						<li class="nav-item">
+							<form action="/user/logout" method="post" id="logoutForm">
+								<a class="nav-link active" aria-current="page" id="logoutLink">Logout</a>
+							</form>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/user/info">UserInfo</a>
+						</li>
+						<c:if test="${pri.uvo.authList.stream().anyMatch(a -> a.auth.equals('ROLE_ADMIN')).get()}">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/user/list">UserList</a>
+						</li>
+						</c:if>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	<script type="text/javascript">
+		document.getElementById('logoutLink').addEventListener('click', e => {
+			  e.preventDefault();
+			  document.getElementById('logoutForm').submit();
+		});
+	</script>

@@ -1,0 +1,87 @@
+package com.koreait.www.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.koreait.www.domain.PagingVO;
+import com.koreait.www.domain.UserVO;
+import com.koreait.www.handler.PagingHandler;
+import com.koreait.www.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/user/*")
+@Controller
+@RequiredArgsConstructor
+@Slf4j
+public class UserController {
+	
+	private final UserService usv;
+	private final BCryptPasswordEncoder bcEncoder;
+	
+	// 회원가입 페이지로 이동
+	@GetMapping("/register")
+	public void register() {}
+	
+	@PostMapping("/register")
+	public String register(UserVO uvo) {
+		// 회원가입 처리
+		// password 암호화
+		uvo.setPwd(bcEncoder.encode(uvo.getPwd()));
+		usv.insert(uvo);
+		
+		return "redirect:/";
+	}
+	
+	// 로그인 페이지로 이동
+	@GetMapping("/login")
+	public void login() {}
+	
+	@PostMapping("/login")
+	public String login(HttpServletRequest request, RedirectAttributes re) {
+		// 실제 로그인 시에는 Security의 filter에서 가져감
+		// 로그인 실패 시 다시 로그인 페이지로 돌아와 오류 메시지를 전송
+		re.addAttribute("errmsg", request.getAttribute("errmsg"));
+		
+		return "redirect:/user/login";
+	}
+	
+	@GetMapping("/check/{email}")
+	@ResponseBody
+	public String emailCheck(@PathVariable("email") String email) {
+		return usv.isRegistered(email) ? "1" : "0";
+	}
+	
+	@GetMapping("/info")
+	public void info() {}
+	
+	@GetMapping("/list")
+	public void list(Model m, PagingVO pgvo) {
+		List<UserVO> list = usv.getList(pgvo);
+		
+		int totalCount = usv.getTotalCount(pgvo);
+		PagingHandler ph = new PagingHandler(totalCount, pgvo);
+		
+		m.addAttribute("ph", ph);
+		m.addAttribute("list", list);
+	}
+	
+	@PostMapping("/update")
+	public String update(UserVO uvo) {
+		if (uvo.getPwd() != null) uvo.setPwd(bcEncoder.encode(uvo.getPwd()));
+		usv.update(uvo);
+		return "redirect:/";
+	}
+}

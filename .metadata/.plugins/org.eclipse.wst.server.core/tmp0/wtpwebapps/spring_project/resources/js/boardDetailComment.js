@@ -65,10 +65,12 @@ function spreadCommentList(bno, page = 1) {
       let comment = '<div class="container border border-secondary rounded mt-3">';
         comment += '<div class="row w-100 justify-content-evenly">';
           comment += `<div class="col-7 p-0 border-end d-flex justify-content-center align-items-center">${cvo.writer}</div>`;
-          comment += `<div class="col-4 p-0 d-flex justify-content-center align-items-center">${cvo.regDate}</div>`;
+          comment += `<div class="col-4 px-0 py-2 d-flex justify-content-center align-items-center">${cvo.regDate}</div>`;
           comment += `<div class="col-1 d-flex p-0 justify-content-center align-items-center" data-cno=${cvo.cno}>`;
+          if(cvo.writer == nickName) {
             comment += `<button type="button" class="btn btn-outline-warning mod" data-bs-target="#myModal" data-bs-toggle="modal">%</button>`; // 수정 버튼
             comment += `<button type="button" class="btn btn-outline-danger del">X</button>`; // 삭제 버튼
+          }
           comment += '</div>';
         comment += '</div>';
         comment += '<div class="row border-top w-100 ms-1">';

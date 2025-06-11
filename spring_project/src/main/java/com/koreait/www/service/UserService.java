@@ -1,9 +1,22 @@
 package com.koreait.www.service;
 
+import java.util.List;
+
+import com.koreait.www.domain.PagingVO;
 import com.koreait.www.domain.UserVO;
 
 public interface UserService {
 
 	int insert(UserVO uvo);
+
+	boolean isRegistered(String email);
+
+	List<UserVO> getList(PagingVO pgvo);
+
+	int getTotalCount(PagingVO pgvo);
+
+	int update(UserVO uvo);
+
+	int delete(String email);
 
 }

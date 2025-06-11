@@ -1,8 +1,0 @@
-package com.koreait.www.controller;
-
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController // 비동기
-public class CommentController {
-
-}

@@ -84,8 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// ADMIN > MANAGER > USER
 		http.authorizeRequests()
 			.antMatchers("/user/list").hasRole("ADMIN")
-			.antMatchers("/", "/user/login", "/user/register",
-					"/board/list", "/board/detail",
+			.antMatchers("/", "/user/login", "/user/register", "/user/check/**",
+					"/board/list", "/board/detail", "custom404",
 					"/upload/**", "/resources/**", "/comment/**").permitAll()
 			.anyRequest().authenticated();
 		

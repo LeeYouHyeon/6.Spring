@@ -2,13 +2,9 @@
 <%@ include file="../layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="w-25 position-absolute top-50 start-50 translate-middle p-5 border rounded"
-	style="background-color: azure;">
-	<form action="/user/register" method="post">
-		<h3 class="text-center">User Join Page</h3>
-		<div class="mt-4 mb-3 row align-items-center">
-			<div class="col-12" id="feedback"></div>
-		</div>
+<div class="w-25 p-5 border rounded bg-info-subtle mx-auto my-5">
+	<form action="/user/register" method="post" id="registerForm">
+		<h3 class="text-center mb-3">User Join Page</h3>
 		<div class="mb-3 row align-items-center">
 			<div class="col-4">Email address</div>
 			<div class="col-8">
@@ -34,33 +30,35 @@
 					class="form-control"
 					id="nickName"
 					name="nickName"
-					placeholder="Nickname">
+					placeholder="Nickname"
+					required>
 			</div>
 		</div>
 		
 		<div class="mb-3 row align-items-center">
 			<div class="col-4">Password</div>
 			<div class="col-8">
-				<input type="text"
+				<input type="password"
 					class="form-control"
 					id="pwd"
 					name="pwd"
-					placeholder="password"
-					required>
+					placeholder="Password">
 			</div>
 		</div>
+		
 		<div class="mb-3 row align-items-center">
-			<div class="col-4">Check</div>
+			<div class="col-4" id="pwdCheckArea">Password Check</div>
 			<div class="col-8">
 				<input type="password"
 					class="form-control"
 					id="pwdCheck"
-					placeholder="Check"
-					required>
+					placeholder="Password Check">
 			</div>
 		</div>
+		
 		<div class="mb-3">비밀번호는 영문 대문자, 소문자, 숫자를 각각 포함하고 8자 이상이어야 합니다.</div>
-		<button type="button" class="btn btn-primary w-100">JOIN</button>
+		
+		<button type="button" class="btn btn-primary w-100" id="joinBtn">JOIN</button>
 	</form>
 	
 	<script type="text/javascript" src="/resources/js/userRegister.js"></script>

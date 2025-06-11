@@ -64,32 +64,36 @@
 	
 	<!-- comment line -->
 	<!-- post -->
-	<div class="container border border-secondary rounded w-75 my-3 p-0 d-flex flex-column align-items-center">
-		<div class="row w-100">
-			<div class="col-2 p-1 ps-3 border-end d-flex align-items-center">Writer</div>
-			<div class="col-9 p-1 ps-3 border-end d-flex align-items-center">Comment</div>
-			<div class="col-1 p-1 d-flex justify-content-center align-items-center">
-				<button type="button" id="cmtClearBtn" class="btn btn-outline-secondary">Clear</button>	
+	<sec:authorize access="isAuthenticated()">
+		<div class="container border border-secondary rounded w-75 my-3 p-0 d-flex flex-column align-items-center">
+			<sec:authentication property="principal" var="pri"/>
+			<c:set var="nickName" value="${pri.uvo.nickName}" />
+			<div class="row w-100">
+				<div class="col-2 p-1 ps-3 border-end d-flex align-items-center">Writer</div>
+				<div class="col-9 p-1 ps-3 border-end d-flex align-items-center">Comment</div>
+				<div class="col-1 p-1 d-flex justify-content-center align-items-center">
+					<button type="button" id="cmtClearBtn" class="btn btn-outline-secondary">Clear</button>	
+				</div>
+			</div>
+			<div class="row w-100 border-top">
+				<div class="col-2 border-end d-flex justify-content-left align-items-center px-3">
+					<input type="hidden"
+						id="cmtWriter"
+						value="${pri.uvo.nickName}">
+					${pri.uvo.nickName}
+				</div>
+				<div class="col-9 border-end d-flex align-items-center p-1">
+					<input type="text"
+						id="cmtText"
+						class="border-0 w-100 form-control"
+						placeholder="Write a Comment">
+				</div>
+				<div class="col-1 p-1 d-flex justify-content-center align-items-center">
+					<button type="button" id="cmtAddBtn" class="btn btn-outline-primary">Post</button>
+				</div>
 			</div>
 		</div>
-		<div class="row w-100 border-top">
-			<div class="col-2 border-end d-flex align-items-center p-1">
-				<input type="text"
-					id="cmtWriter"
-					class="border-0 w-100 form-control"
-					placeholder="Writer">
-			</div>
-			<div class="col-9 border-end d-flex align-items-center p-1">
-				<input type="text"
-					id="cmtText"
-					class="border-0 w-100 form-control"
-					placeholder="Write a Comment">
-			</div>
-			<div class="col-1 p-1 d-flex justify-content-center align-items-center">
-				<button type="button" id="cmtAddBtn" class="btn btn-outline-primary">Post</button>
-			</div>
-		</div>
-	</div>
+	</sec:authorize>
 	<!-- print -->
 	<div class="w-75 my-3 container p-0 d-flex flex-column align-items-center">
 		<div class="row w-100 mt-3 py-3 fs-5 rounded border border-secondary justify-content-center">Comments</div>
@@ -127,6 +131,7 @@
 
 	<script type="text/javascript">
 		const bnoValue = `<c:out value="${bvo.bno}" />`;
+		const nickName = `<c:out value="${nickName}" />`;
 		console.log(bnoValue);
 	</script>
 	<script type="text/javascript" src="/resources/js/boardDetailComment.js"></script>

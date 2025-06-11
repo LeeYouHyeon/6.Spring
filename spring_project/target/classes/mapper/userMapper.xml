@@ -19,4 +19,20 @@
 	<update id="updateLastLogin">
 		update user set last_login = now() where email = #{authEmail}
 	</update>
+	<select id="getList" resultType="com.koreait.www.domain.UserVO">
+		select * from user limit #{pageStart}, #{qty}
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(email) from user
+	</select>
+	<update id="update">
+		update user set nick_name=#{nickName}<if test="pwd != null">, pwd=#{pwd}</if>
+		where email=#{email}
+	</update>
+	<delete id="removeAuth">
+		delete from auth where email=#{email}
+	</delete>
+	<delete id="remove">
+		delete from user where email=#{email}
+	</delete>
 </mapper>

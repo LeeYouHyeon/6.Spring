@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableScheduling
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.koreait.www.controller", "com.koreait.www.service", "com.koreait.www.handler", "com.koreait.www.security" })
+@ComponentScan(basePackages = { "com.koreait.www.controller", "com.koreait.www.service", "com.koreait.www.handler", "com.koreait.www.security", "com.koreait.www.exception" })
 // DAO는 DB에서 설정, 나머지는 @ComponentScan에 추가
 public class ServletConfiguration implements WebMvcConfigurer {
 

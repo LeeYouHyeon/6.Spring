@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+
+
+<div class="container-md">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Email</th>
+				<th scope="col">NickName</th>
+				<th scope="col">Registered Date</th>
+				<th scope="col">Last Login</th>
+				<th scope="col">IsAdmin</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="${uvo}">
+				<tr>
+					<td>${uvo.email}</td>
+					<td>${uvo.nickName}</td>
+					<td>${uvo.regDate}</td>
+					<td>${uvo.lastLogin}</td>
+					<td>
+						<c:if test="${uvo.authList.contains('USER_ADMIN')}">Y</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+
+<%@ include file="../layout/footer.jsp"%>

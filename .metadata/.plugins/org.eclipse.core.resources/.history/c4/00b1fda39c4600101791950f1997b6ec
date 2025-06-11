@@ -1,0 +1,5 @@
+package com.koreait.www.exception;
+
+public class CommonExceptionAdvice {
+
+}

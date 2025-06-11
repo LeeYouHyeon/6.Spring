@@ -19,13 +19,13 @@
 				required>
 		</div>
 		<div class="mb-3">
-			<label for="writer" class="form-label">Writer</label>
-			<input type="text"
+			<sec:authentication property="principal" var="pri"/>
+			<label for="writer" class="form-label">Writer : </label>
+			<input type="hidden"
 				class="form-control"
 				id="writer"
-				placeholder="writer"
 				name="writer"
-				required>
+				value="${pri.uvo.email}">${pri.uvo.nickName}
 		</div>
 		<div class="mb-3">
 			<label for="content" class="form-label">Content</label>

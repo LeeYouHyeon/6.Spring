@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
+
+<div class="w-25 position-absolute top-50 start-50 translate-middle p-5 border rounded bg-info-subtle">
+	<sec:authentication property="principal" var="pri" />
+	<form action="/user/update" method="post" id="updateForm">
+		<h3 class="text-center mb-3">User Info Page</h3>
+		<div class="mb-3 row align-items-center">
+			<div class="col-4">Email address</div>
+			<div class="col-8">
+				<input type="hidden"
+					class="form-control"
+					id="email"
+					name="email"
+					placeholder="name@example.com"
+					value="${pri.uvo.email}">
+				${pri.uvo.email}
+			</div>
+		</div>
+		
+		<div class="mb-3 row align-items-center">
+			<div class="col-4">Nickname</div>
+			<div class="col-8">
+				<input type="text"
+					class="form-control"
+					id="nickName"
+					name="nickName"
+					placeholder="Nickname"
+					value="${pri.uvo.nickName}">
+			</div>
+		</div>
+		
+		<div class="mb-3 row justify-content-center align-items-center">
+			<div class="col-4 d-flex justify-content-center">
+				<button type="button"
+					id="pwdChangeBtn"
+					class="btn btn-secondary">Change Password</button>
+			</div>
+			<div class="col-8" id="pwdCheckArea"></div>
+		</div>
+		
+		<div class="mb-3 row align-items-center">
+			<div class="col-4">Password</div>
+			<div class="col-8">
+				<input type="password"
+					class="form-control"
+					id="pwd"
+					name="pwd"
+					placeholder="Password"
+					disabled>
+			</div>
+		</div>
+		
+		<div class="mb-3 row align-items-center">
+			<div class="col-4" id="pwdCheckArea">Password Check</div>
+			<div class="col-8">
+				<input type="password"
+					class="form-control"
+					id="pwdCheck"
+					placeholder="Password Check"
+					disabled>
+			</div>
+		</div>
+		
+		<div class="mb-3">비밀번호는 영문 대문자, 소문자, 숫자를 각각 포함하고 8자 이상이어야 합니다.</div>
+		
+		<button type="button" class="btn btn-primary w-100" id="updateBtn">Update</button>
+	</form>
+	
+	<script type="text/javascript" src="/resources/js/userInfo.js"></script>
+</div>
+<%@ include file="../layout/footer.jsp"%>
