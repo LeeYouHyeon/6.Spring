@@ -11,6 +11,8 @@
 	
 	<h3 class="text-center mb-5">Login</h3>
 	<form action="/user/login" method="post">
+		<!-- CSRF 토큰 -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<div class="mb-4 d-flex justify-content-around align-items-center">
 			<div class="w-25">Email</div>
 			<input type="text"

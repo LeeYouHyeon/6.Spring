@@ -8,6 +8,9 @@
 	<form action="/board/insert"
 		method="post"
 		enctype="multipart/form-data">
+		<!-- CSRF 토큰 -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		
 		<!-- bvo area -->
 		<div class="mb-3">
 			<label for="title" class="form-label">Title</label>

@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.koreait.www.security.CustomAuthUserService;
 import com.koreait.www.security.LoginFailureHandler;
@@ -73,8 +75,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// 권한에 따른 주소 매핑
 		// 로그인 로그아웃 구성정보 설정
+		
 		// csrf() : csrf 공격에 대한 설정
-		http.csrf().disable(); // 작업 후 삭제
+		// Spring security에서 기본적으로 활성화 되어있는 기능
+		// 클라이언트 -> 서버 요청을 보낼 때 CSRF 토큰을 함께 전송
+		// GET mapping은 토큰을 요구하지 않음(서버에서 데이터를 일방적으로 보내는 mapping)
+		// post, put, delete는 토큰 요구함
+//		http.csrf().disable(); // 작업 후 삭제
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		http.addFilterBefore(filter, CsrfFilter.class);
 		
 		// 권한에 따른 승인 요청
 		// antMatchers : 접근을 허용하는 경로

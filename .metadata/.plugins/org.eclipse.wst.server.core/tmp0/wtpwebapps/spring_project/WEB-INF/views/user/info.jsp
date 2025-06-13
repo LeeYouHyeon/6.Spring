@@ -4,6 +4,8 @@
 <div class="w-25 p-5 my-5 mx-auto border rounded bg-info-subtle">
 	<sec:authentication property="principal" var="pri" />
 	<form action="/user/update" method="post" id="updateForm">
+			<!-- CSRF -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<h3 class="text-center mb-3">User Info Page</h3>
 		<div class="mb-3 row align-items-center">
 			<div class="col-4">Email address</div>

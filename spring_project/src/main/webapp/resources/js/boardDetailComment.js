@@ -4,6 +4,9 @@
 console.log("boardDetailComment.js in");
 console.log(bnoValue);
 
+const csrfHeader = document.querySelector('meta[name="_csrf.header"]').getAttribute('content');
+const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+
 const cmtText = document.getElementById('cmtText'); // span이면 innerText로 가져오기
 const cmtWriter = document.getElementById('cmtWriter');
 const cmtUpdateBtn = document.getElementById('cmtUpdateBtn');
@@ -164,7 +167,8 @@ async function updateComment(cmtData) {
     const config = {
       method: 'put', // RESTful
       headers: {
-        'Content-Type' : 'application/json; charset=utf-8'
+        'Content-Type' : 'application/json; charset=utf-8',
+        [csrfHeader]: csrfToken
       },
       body: JSON.stringify(cmtData)
     };
@@ -182,7 +186,8 @@ async function removeCommentFromServer(cno) {
   try {
     const url = `/comment/${cno}`;
     const config = {
-      method: 'delete'
+      method: 'delete',
+      [csrfHeader]: csrfToken
     };
     const resp = await fetch(url, config);
     const result = await resp.text(); // isOk
@@ -212,7 +217,8 @@ async function postCommentToServer(cmtData) {
     const config = {
       method : "post",
       headers: {
-        'Content-Type' : 'application/json; charset=utf-8'
+        'Content-Type' : 'application/json; charset=utf-8',
+        [csrfHeader]: csrfToken
       },
       body: JSON.stringify(cmtData)
     };

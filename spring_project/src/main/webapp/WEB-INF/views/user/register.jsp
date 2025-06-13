@@ -4,6 +4,9 @@
 
 <div class="w-25 p-5 border rounded bg-info-subtle mx-auto my-5">
 	<form action="/user/register" method="post" id="registerForm">
+		<!-- CSRF -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	
 		<h3 class="text-center mb-3">User Join Page</h3>
 		<div class="mb-3 row align-items-center">
 			<div class="col-4">Email address</div>

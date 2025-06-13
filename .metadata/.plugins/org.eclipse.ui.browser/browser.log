@@ -1,0 +1,25 @@
+
+6월 12, 2025 09:12:22.742 NEW SESSION
+6월 12, 2025 09:12:22.742 [6900:4728:0612/091222.741:ERROR:chrome\browser\policy\cloud\fm_registration_token_uploader.cc:179] Client is missing for kUser scope
+6월 12, 2025 09:12:23.09 [6900:448:0612/091223.009:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:12:23.70 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+6월 12, 2025 09:12:23.70 I0000 00:00:1749687143.068058    2216 voice_transcription.cc:58] Registering VoiceTranscriptionCapability
+6월 12, 2025 09:12:23.412 Created TensorFlow Lite XNNPACK delegate for CPU.
+6월 12, 2025 09:12:43.773 [6900:448:0612/091243.773:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:12:52.241 [6900:448:0612/091252.240:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:13:33.26 [6900:448:0612/091333.026:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:13:45.596 [6900:448:0612/091345.596:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:14:47.698 [6900:448:0612/091447.698:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:15:18.308 [6900:448:0612/091518.308:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:16:45.71 [6900:448:0612/091645.071:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:18:29.337 [6900:448:0612/091829.337:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:20:07.714 [6900:448:0612/092007.714:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:26:25.901 [6900:448:0612/092625.901:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:26:59.716 [6900:448:0612/092659.716:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:37:20.766 [6900:448:0612/093720.766:ERROR:google_apis\gcm\engine\connection_factory_impl.cc:434] Failed to connect to MCS endpoint with error -118
+6월 12, 2025 09:47:21.349 [6900:448:0612/094721.349:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:47:42.861 [6900:448:0612/094742.861:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:48:29.435 [6900:448:0612/094829.435:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:50:24.533 [6900:448:0612/095024.533:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 09:54:12.919 [6900:448:0612/095412.919:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+6월 12, 2025 10:01:36.340 [6900:448:0612/100136.340:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT

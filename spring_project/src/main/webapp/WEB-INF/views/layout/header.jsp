@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<sec:csrfMetaTags/>
+<meta name="_csrf" content="CSRF_token_VALUE">
+<meta name="_csrf.header" content="X-CSRF-TOKEN">
 <title>Spring Project</title>
 <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
 <script type="text/javascript" src="/resources/dist/js/bootstrap.bundle.min.js"></script>
@@ -50,6 +53,9 @@
 						<sec:authentication property="principal" var="pri"/>
 						<li class="nav-item">
 							<form action="/user/logout" method="post" id="logoutForm">
+								<!-- CSRF -->
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								
 								<a class="nav-link active" aria-current="page" id="logoutLink">Logout</a>
 							</form>
 						</li>

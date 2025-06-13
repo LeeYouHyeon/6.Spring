@@ -12,6 +12,9 @@
 		class="w-100"
 		enctype="multipart/form-data">
 			<input type="hidden" name="bno" value="${bvo.bno}">
+			<!-- CSRF -->
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			
 			<!-- bvo area -->
 			<div class="mb-3">
 				<label for="title" class="form-label">Title</label>
